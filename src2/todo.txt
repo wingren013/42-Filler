@@ -1,0 +1,3 @@
+rewrite ls and lc because it converts widechars to normal chars not what I thought.
+
+handle minimum field width and redo how I handle precision based on https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/format.html#precision
