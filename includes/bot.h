@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 15:26:15 by smifsud           #+#    #+#             */
-/*   Updated: 2017/01/20 19:35:27 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/03 10:33:36 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ typedef struct		s_game
 {
 	size_t			points;
 	char			**board;
-	size_t			width;
-	size_t			height;
-	size_t			pieceheight;
-	size_t			piecewidth;
+	ssize_t			width;
+	ssize_t			height;
+	ssize_t			pieceheight;
+	ssize_t			piecewidth;
 	size_t			piecex;
 	size_t			piecey;
 	size_t			savedx;
