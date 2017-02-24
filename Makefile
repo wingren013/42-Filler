@@ -6,7 +6,7 @@
 #    By: smifsud <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/21 09:27:22 by smifsud           #+#    #+#              #
-#    Updated: 2017/02/03 10:46:49 by smifsud          ###   ########.fr        #
+#    Updated: 2017/02/14 20:11:47 by smifsud          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ FILENAMES2 += zd_flag.c zu_flag.c zo_flag.c zx_flag.c zupperhex_flag.c modstr_co
 DIR2INC = -I src1
 
 DIR3 = bot
-FILENAMES3 = globals.c mapreader.c phil.c pieceplacer.c player3.c
+FILENAMES3 = globals.c mapreader.c phil.c pieceplacer.c player5.c validcheck.c
 INCLUDE = includes/
 
 OBJS = $(addprefix build/, $(FILENAMES:.c=.o))
@@ -50,7 +50,7 @@ FILES = $(addprefix src1/, $(FILENAMES))
 FILES2 = $(addprefix $(DIR2)/, $(FILENAMES2))
 FILES3 = $(addprefix $(DIR3)/, $(FILENAMES3))
 GNL = notgnl/get_next_line.c
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 .PHONY: all index clean fclean re comp
 

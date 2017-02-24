@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:43:49 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/07 22:22:25 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/14 18:59:07 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,12 @@
 
 int			validp2(size_t x, size_t y, t_game game, char **piece)
 {
-	dprintf(2, "intersection %ld | %ld", y, x);
 	game.piecex += 1;
 	x++;
 	while (piece[game.piecey])
 	{
 		if (piece[game.piecey][game.piecex] == '*' && PIECE(game.board[y][x]))
-		{
-			dprintf(2, " not chosen\n");
 			return (0);
-		}
 		if (piece[game.piecey][game.piecex] == 0)
 		{
 			x = game.savedx;
@@ -42,7 +38,6 @@ int			validp2(size_t x, size_t y, t_game game, char **piece)
 			game.piecex += 1;
 		}
 	}
-	dprintf(2, " chosen\n");
 	return (1);
 }
 
@@ -75,37 +70,6 @@ int			validcheck(size_t x, size_t y, t_game *game, char **piece)
 	return (validp2(x, y, *game, piece));
 }
 
-/*
-int			validcheck(ssize_t x, ssize_t y, t_game *game, char **piece)
-{
-	game->piecey = game->pieceheight - 1;
-	game->piecex = 0;
-	game->savedx = x;
-	while (piece[game->piecey])
-	{
-		if (piece[game->piecey][game->piecex] == 0)
-		{
-			x = game->savedx;
-			game->piecex = 0;
-			game->piecey -= 1;
-			y--;
-		}
-		else
-		{
-			x++;
-			game->piecex += 1;
-		}
-		if (game->piecey == -1UL || (piece[game->piecey][game->piecex] == '*' && EP(game->board[y][x])))
-			return (0);
-		if (piece[game->piecey][game->piecex] == '*' && MP(game->board[y][x]))
-			break ;
-	}
-	if (piece[game->piecey] == 0)
-		return (0);
-	return (validp2(x, y, *game, piece));
-}
-*/
-
 size_t		*returnamabobber(size_t x, size_t y)
 {
 	size_t	*ret;
@@ -125,6 +89,8 @@ size_t		*piecechooser(t_game *game, char **piece)
 	y = game->height - 1;
 	while (1)
 	{
+		if (game->pieceheight > 1 && y == game->height - 1)
+			y -= game->pieceheight - 1;
 		if (validcheck(x, y, game, piece))
 		{
 			*game = pieceplacer(x, y, *game, piece);
@@ -135,7 +101,7 @@ size_t		*piecechooser(t_game *game, char **piece)
 			return (returnamabobber(0, 0));
 		if (x < game->width && x + game->piecewidth < game->width)
 			x++;
-		else if (y > 0 && y - game->pieceheight >= 0)
+		else if (y > 0)
 		{
 			x = 0;
 			y--;
@@ -144,5 +110,5 @@ size_t		*piecechooser(t_game *game, char **piece)
 }
 
 /*
- * bottom left move
- */
+** bottom left move
+*/

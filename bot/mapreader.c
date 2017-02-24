@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 13:55:57 by smifsud           #+#    #+#             */
-/*   Updated: 2017/01/20 20:18:46 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/09 22:22:17 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char	*mapreader(size_t i, size_t s, int fd, t_game *game)
 
 	NOMEMLEAK;
 	get_next_line(fd, &buf);
+	MALLOC_GUARD(*buf);
 	parse_buf(buf, &x, &y);
 	PR_MALLOC(ret, char*, char, (x + 3 + (y * (6 + x))));
 	ft_bzero(ret, (x + 3 + (y * (6 + x))));

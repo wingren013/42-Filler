@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:43:49 by smifsud           #+#    #+#             */
-/*   Updated: 2017/01/20 22:28:05 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/14 19:06:43 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,29 +82,34 @@ size_t		*returnamabobber(size_t x, size_t y)
 
 size_t		*piecechooser(t_game *game, char **piece)
 {
-	size_t	x;
-	size_t	y;
+	ssize_t	x;
+	ssize_t	y;
 
-	x = game->width;
+	x = game->width - 1;
 	y = 0;
 	while (1)
 	{
+		while (x + game->piecewidth > game->width)
+			x--;
 		if (validcheck(x, y, game, piece))
 		{
 			*game = pieceplacer(x, y, *game, piece);
 			return (returnamabobber(x, y));
 		}
-		if (x + game->piecewidth > game->width ||
-				y + game->pieceheight >= game->height)
+		if (y + game->pieceheight >= game->height || (x == 0 && y == game->height - 1))
 		{
 			return (returnamabobber(0, 0));
 		}
-		if (x > 0 && x + game->piecewidth < game->width)
+		if (x > 0)
 			x--;
 		else if (y < game->height && y + game->pieceheight <= game->height)
 		{
-			x = game->width;
+			x = game->width - 1;
 			y++;
 		}
 	}
 }
+
+/*
+** top right  move
+*/

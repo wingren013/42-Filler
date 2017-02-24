@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:34:00 by smifsud           #+#    #+#             */
-/*   Updated: 2017/01/20 21:17:20 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/14 21:18:33 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <printf.h>
 
 #define PIECE(c) (c == 'x' || c == 'X' || c == 'o' || c == 'O')
-#define NORMBS i = 0; x = 0; y = 0
+#define NORMBS(m) i = 0; x = 0; y = 0; MALLOC_GUARD(m)
 #define EVIL ret[y][x]= 0; y++; x = 0
 
 char	**maptranslate(char *map)
@@ -27,7 +27,7 @@ char	**maptranslate(char *map)
 	size_t	x;
 	size_t	y;
 
-	NORMBS;
+	NORMBS(map);
 	PR_MALLOC(ret, char**, char*, ft_strlen(map) + 2);
 	PR_MALLOC(ret[y], char*, char, ft_strlen(map) + 2);
 	while (map[i])
@@ -55,7 +55,7 @@ char	**piecetranslate(char *piece)
 	size_t	x;
 	size_t	y;
 
-	NORMBS;
+	NORMBS(piece);
 	MALLOC_GUARD(piece);
 	PR_MALLOC(ret, char**, char*, ft_strlen(piece) + 2);
 	PR_MALLOC(ret[y], char*, char, ft_strlen(piece) + 2);
