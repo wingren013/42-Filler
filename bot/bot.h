@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 15:26:15 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/14 19:57:53 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/23 20:06:11 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct		s_game
 	int				updown;
 	size_t			chosey;
 	size_t			chosex;
+	ssize_t			widthoffset;
+	ssize_t			heightoffset;
 }					t_game;
 
 extern char			g_enemy;

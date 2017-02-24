@@ -1,4 +1,5 @@
 #include <bot.h>
+#include <printf.h>
 
 int			validp2(size_t x, size_t y, t_game game, char **piece)
 {
@@ -55,12 +56,8 @@ int			validcheck(size_t x, size_t y, t_game *game, char **piece)
 
 size_t		*returnamabobber(size_t x, size_t y, t_game *game)
 {
-	size_t	*ret;
-
-	PR_MALLOC(ret, size_t*, size_t, 2);
-	ret[0] = y;
-	ret[1] = x;
+	ft_printf("%ld %ld\n", y - game->heightoffset, x - game->widthoffset);
 	game->chosey = y;
 	game->chosex = x;
-	return (ret);
+	return (0);
 }

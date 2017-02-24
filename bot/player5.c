@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:43:49 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/14 21:03:40 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/23 21:23:23 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,39 +147,9 @@ size_t		*cornerchooser(t_game *game, char **piece)
 	}
 }
 
-size_t		*chosechooser(t_game *game, char **piece)
-{
-	ssize_t	x;
-	ssize_t	y;
-
-	x = game->chosex;
-	y = game->chosey;
-	while (1)
-	{
-		if (x + game->piecewidth > game->width ||
-				y + game->pieceheight >= game->height)
-		{
-			return (0);
-		}
-		if (validcheck(x, y, game, piece))
-		{
-			*game = pieceplacer(x, y, *game, piece);
-			return (returnamabobber(x, y, game));
-		}
-		if (x < game->width && x + game->piecewidth < game->width)
-			x++;
-		else if (y < game->height && y + game->pieceheight <= game->height)
-		{
-			x = 0;
-			y++;
-		}
-	}
-}
-
 size_t		*piecechooser(t_game *game, char **piece)
 {
-	size_t	*chose;
-	/*if (MP('x'))
+	if (MP('x'))
 	{
 		if (game->updown == 1 || game->updown == 0)
 		{
@@ -193,23 +163,6 @@ size_t		*piecechooser(t_game *game, char **piece)
 				game->updown = 1;
 			return (upchooser(game, piece));
 		}
-	} */
-	if (MP('x'))
-	{
-		if (game->updown == 2)
-		{
-			game->updown = 1;
-			chose = chosechooser(game, piece);
-			if (chose)
-				return (chose);
-			else
-				return (rightchooser(game, piece));
-		}
-		else
-		{
-			game->updown = 2;
-			return (downchooser(game, piece));
-		}	
 	}
 	else
 	{
