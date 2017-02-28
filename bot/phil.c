@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:34:00 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/23 21:30:29 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/02/27 16:32:59 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,7 @@ int		main(void)
 
 	playerchooser(0);
 	PR_MALLOC(game, t_game*, t_game, 1);
+	game->updown = 0;
 	while (1)
 	{
 		game->board = maptranslate(mapreader(0, 0, 0, game));
@@ -202,6 +203,10 @@ int		main(void)
 		piece = pieceparse(piece, game);
 		piecechooser(game, piece);
 		free(game->board);
+		/*
+		** for (int i = 0; i < 200000000; i++)
+		** i++;
+		*/
 	}
 	return (0);
 }
