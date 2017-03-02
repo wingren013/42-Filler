@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:43:49 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/14 19:06:43 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/03/01 15:42:38 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,9 @@ size_t		*piecechooser(t_game *game, char **piece)
 			*game = pieceplacer(x, y, *game, piece);
 			return (returnamabobber(x, y));
 		}
-		if (y + game->pieceheight >= game->height || (x == 0 && y == game->height - 1))
-		{
+		if (y + game->pieceheight >= game->height ||
+				(x == 0 && y == game->height - 1))
 			return (returnamabobber(0, 0));
-		}
 		if (x > 0)
 			x--;
 		else if (y < game->height && y + game->pieceheight <= game->height)

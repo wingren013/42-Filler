@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:43:49 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/27 18:28:26 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/03/01 15:30:33 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 /*
 ** top right  move
 */
+
+#define FORNORM x = game->width - 1; y = game->height - 1
 
 size_t		*rightchooser(t_game *game, char **piece)
 {
@@ -33,10 +35,9 @@ size_t		*rightchooser(t_game *game, char **piece)
 			*game = pieceplacer(x, y, *game, piece);
 			return (returnamabobber(x, y, game));
 		}
-		if (y + game->pieceheight >= game->height || (x == 0 && y == game->height - 1))
-		{
+		if (y + game->pieceheight >= game->height ||
+				(x == 0 && y == game->height - 1))
 			return (returnamabobber(0, 0, game));
-		}
 		if (x > 0)
 			x--;
 		else if (y < game->height && y + game->pieceheight <= game->height)
@@ -122,8 +123,7 @@ size_t		*cornerchooser(t_game *game, char **piece)
 	ssize_t	x;
 	ssize_t	y;
 
-	x = game->width - 1;
-	y = game->height - 1;
+	FORNORM;
 	while (1)
 	{
 		if (game->pieceheight > 1 && y == game->height - 1)
@@ -147,7 +147,7 @@ size_t		*cornerchooser(t_game *game, char **piece)
 	}
 }
 
-size_t		*piecechooser(t_game *game, char **piece)
+/*size_t		*piecechooser(t_game *game, char **piece)
 {
 	if (game->width < 90)
 	{
@@ -195,7 +195,7 @@ size_t		*piecechooser(t_game *game, char **piece)
 			if (game->updown == 1)
 			{
 				game->updown = 2;
-			return (rightchooser(game, piece));
+				return (rightchooser(game, piece));
 			}
 			else
 			{
@@ -225,4 +225,4 @@ size_t		*piecechooser(t_game *game, char **piece)
 		}
 	}
 	return (upchooser(game, piece));
-}
+}*/

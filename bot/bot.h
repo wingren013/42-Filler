@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 15:26:15 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/23 20:06:11 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/03/01 15:52:44 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define BOT_H
 
 # include <libft.h>
-#define MP(c) (c == g_piece || c == g_piece + 32)
-#define EP(c) (c == g_enemy || c == g_enemy + 32)
-#define PIECE(c) (c == 'x' || c == 'X' || c == 'o' || c == 'O')
+# define MP(c) (c == g_piece || c == g_piece + 32)
+# define EP(c) (c == g_enemy || c == g_enemy + 32)
+# define PIECE(c) (c == 'x' || c == 'X' || c == 'o' || c == 'O')
 
 typedef struct		s_game
 {
@@ -45,5 +45,11 @@ char				*mapreader(size_t i, size_t s, int fd, t_game *game);
 t_game				pieceplacer(size_t x, size_t y, t_game game, char **piece);
 int					validcheck(size_t x, size_t y, t_game *game, char **piece);
 size_t				*returnamabobber(size_t x, size_t y, t_game *game);
+void				playerchooser(int fd);
+
+size_t				*rightchooser(t_game *game, char **piece);
+size_t				*downchooser(t_game *game, char **piece);
+size_t				*upchooser(t_game *game, char **piece);
+size_t				*cornerchooser(t_game *game, char **piece);
 
 #endif

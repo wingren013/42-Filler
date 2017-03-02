@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:34:00 by smifsud           #+#    #+#             */
-/*   Updated: 2017/02/27 16:32:59 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/03/01 16:17:13 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 #include <printf.h>
 
 #define PIECE(c) (c == 'x' || c == 'X' || c == 'o' || c == 'O')
-#define NORMBS(m) i = 0; x = 0; y = 0; MALLOC_GUARD(m)
+#define NORMBS(i, x, y, m) i = 0; x = 0; y = 0; MALLOC_GUARD(m)
 #define EVIL ret[y][x]= 0; y++; x = 0
-#define PM ((game->piecewidth-game->widthoffset)*(game->pieceheight-game->heightoffset))
+#define PM ((game->piecewidth-game->widthoffset)*BS)
+#define BS (game->pieceheight-game->heightoffset)
+#define INC x = 0; y++
 
 char	**maptranslate(char *map)
 {
@@ -28,7 +30,7 @@ char	**maptranslate(char *map)
 	size_t	x;
 	size_t	y;
 
-	NORMBS(map);
+	NORMBS(i, x, y, map);
 	PR_MALLOC(ret, char**, char*, ft_strlen(map) + 2);
 	PR_MALLOC(ret[y], char*, char, ft_strlen(map) + 2);
 	while (map[i])
@@ -56,7 +58,7 @@ char	**piecetranslate(char *piece)
 	size_t	x;
 	size_t	y;
 
-	NORMBS(piece);
+	NORMBS(i, x, y, piece);
 	MALLOC_GUARD(piece);
 	PR_MALLOC(ret, char**, char*, ft_strlen(piece) + 2);
 	PR_MALLOC(ret[y], char*, char, ft_strlen(piece) + 2);
@@ -83,8 +85,8 @@ char	**copyover(char **piece, t_game *game, ssize_t x, ssize_t y)
 	char	**ret;
 	ssize_t	i;
 	ssize_t	l;
-	i = 0;
-	l = 0;
+
+	NORMBS(i, l, i, piece);
 	x = game->widthoffset;
 	y = game->heightoffset;
 	PR_MALLOC(ret, char**, char*, PM + 1);
@@ -113,12 +115,9 @@ char	**pieceparse(char **piece, t_game *game)
 	ssize_t	y;
 	int		flag;
 
-	flag = 0;
-	y = 0;
-	x = 0;
+	NORMBS(flag, x, y, piece);
 	game->widthoffset = 0;
 	game->heightoffset = 0;
-	MALLOC_GUARD(piece);
 	while (piece[y])
 	{
 		while (piece[y][x])
@@ -136,52 +135,9 @@ char	**pieceparse(char **piece, t_game *game)
 			}
 			x++;
 		}
-		x = 0;
-		y++;
+		INC;
 	}
 	return (copyover(piece, game, x, y));
-}
-void	playerchooser(int fd)
-{
-	char	*buf;
-
-	while (get_next_line(fd, &buf) > 0)
-	{
-		if (ft_strstr(buf, "filler"))
-		{
-			if (ft_strstr(buf, "$$$ exec p1"))
-			{
-				g_enemy = 'X';
-				g_piece = 'O';
-				free(buf);
-				return ;
-			}
-			else if (ft_strstr(buf, "$$$ exec p2"))
-			{
-				free(buf);
-				g_enemy = 'O';
-				g_piece = 'X';
-				return ;
-			}
-		}
-	}
-}
-
-void	showpiece(char **piece)
-{
-	size_t	y = 0;
-	size_t	x = 0;
-	while (piece[y])
-	{
-		while (piece[y][x])
-		{
-			dprintf(2, "%c", piece[y][x]);
-			x++;
-		}
-		x = 0;
-		y++;
-		dprintf(2, "\n");
-	}
 }
 
 int		main(void)
@@ -203,10 +159,6 @@ int		main(void)
 		piece = pieceparse(piece, game);
 		piecechooser(game, piece);
 		free(game->board);
-		/*
-		** for (int i = 0; i < 200000000; i++)
-		** i++;
-		*/
 	}
 	return (0);
 }
