@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/03 12:43:49 by smifsud           #+#    #+#             */
-/*   Updated: 2017/03/01 15:30:33 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/03/01 16:33:43 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,83 +146,3 @@ size_t		*cornerchooser(t_game *game, char **piece)
 		}
 	}
 }
-
-/*size_t		*piecechooser(t_game *game, char **piece)
-{
-	if (game->width < 90)
-	{
-		if (MP('x'))
-		{
-			if (game->updown < 4)
-			{
-				game->updown += 1;
-				return (rightchooser(game, piece));
-			}
-			else if (game->updown < 6)
-			{
-				game->updown += 1;
-				return (upchooser(game, piece));
-			}
-			else
-			{
-				game->updown += 1;
-				if (game->updown == 8)
-					game->updown = 4;
-				return (downchooser(game, piece));
-			}
-		}
-		else if (MP('o'))
-		{
-			if (game->updown == 3)
-			{
-				game->updown = 1;
-				return (cornerchooser(game, piece));
-			}
-			else
-			{
-				if (game->updown == 2)
-					game->updown += 1;
-				else
-					game->updown = 2;
-				return (rightchooser(game, piece));
-			}
-		}
-	}
-	else
-	{
-		if (MP('x'))
-		{
-			if (game->updown == 1)
-			{
-				game->updown = 2;
-				return (rightchooser(game, piece));
-			}
-			else
-			{
-				game->updown = 1;
-				return (cornerchooser(game, piece));
-			}
-		}
-		else
-		{
-			if (game->updown < 4)
-			{
-				game->updown += 1;
-				return (rightchooser(game, piece));
-			}
-			else if (game->updown < 6)
-			{
-				game->updown += 1;
-				return (upchooser(game, piece));
-			}
-			else
-			{
-				game->updown += 1;
-				if (game->updown == 8)
-					game->updown = 4;
-				return (downchooser(game, piece));
-			}
-		}
-	}
-	return (upchooser(game, piece));
-}*/

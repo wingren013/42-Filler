@@ -6,7 +6,7 @@
 /*   By: smifsud <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/11 16:34:00 by smifsud           #+#    #+#             */
-/*   Updated: 2017/03/01 16:17:13 by smifsud          ###   ########.fr       */
+/*   Updated: 2017/03/01 16:36:01 by smifsud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #define PM ((game->piecewidth-game->widthoffset)*BS)
 #define BS (game->pieceheight-game->heightoffset)
 #define INC x = 0; y++
+#define NORMER NORMBS(flag, x, y, piece); BSER
+#define BSER game->widthoffset = 0; game->heightoffset = 0
 
 char	**maptranslate(char *map)
 {
@@ -115,9 +117,7 @@ char	**pieceparse(char **piece, t_game *game)
 	ssize_t	y;
 	int		flag;
 
-	NORMBS(flag, x, y, piece);
-	game->widthoffset = 0;
-	game->heightoffset = 0;
+	NORMER;
 	while (piece[y])
 	{
 		while (piece[y][x])
